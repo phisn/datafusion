@@ -1885,6 +1885,11 @@ impl<'a> Display for SchemaDisplay<'a> {
                 Ok(())
             }
             // Expr is not shown since it is aliased
+            Expr::Alias(Alias {
+                name,
+                relation: Some(relation),
+                ..
+            }) => write!(f, "{relation}.{name}"),
             Expr::Alias(Alias { name, .. }) => write!(f, "{name}"),
             Expr::Between(Between {
                 expr,
