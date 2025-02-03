@@ -522,6 +522,8 @@ config_namespace! {
     ///
     /// [`SessionConfig`]: https://docs.rs/datafusion/latest/datafusion/prelude/struct.SessionConfig.html
     pub struct OptimizerOptions {
+        pub use_sort_more_join: bool, default = false
+
         /// When set to true, the optimizer will push a limit operation into
         /// grouped aggregations which have no aggregate expressions, as a soft limit,
         /// emitting groups once the limit is reached, before all rows in the group are read.

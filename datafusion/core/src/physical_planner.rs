@@ -1077,9 +1077,10 @@ impl DefaultPhysicalPlanner {
                             join_type,
                         )?)
                     }
-                } else if session_state.config().target_partitions() > 1
-                    && session_state.config().repartition_joins()
-                    && !prefer_hash_join
+                } else if session_state.config_options().optimizer.use_sort_more_join
+                    || session_state.config().target_partitions() > 1
+                        && session_state.config().repartition_joins()
+                        && !prefer_hash_join
                 {
                     // Use SortMergeJoin if hash join is not preferred
                     // Sort-Merge join support currently is experimental
